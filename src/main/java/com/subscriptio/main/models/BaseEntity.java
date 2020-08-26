@@ -2,6 +2,7 @@ package com.subscriptio.main.models;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -17,6 +18,7 @@ public class BaseEntity {
     @Column(name = "id", columnDefinition = "BINARY(16)")
     private UUID id;
 
+    @CreationTimestamp
     @Column(name = "created_at")
     private Timestamp createdAt;
 }
