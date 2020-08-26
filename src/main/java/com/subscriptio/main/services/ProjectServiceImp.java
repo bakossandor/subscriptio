@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -26,21 +25,21 @@ public class ProjectServiceImp implements ProjectService {
 
     @Override
     public Project retriveProject(UUID id) {
-        Optional<Project> project = projectRepository.findById(id);
-        if(project.isPresent()) {
-            return project.get();
+        Project project = projectRepository.findByIdAndFetchCampaignsEagerly(id);
+        if(project != null) {
+            return project;
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to project find resource");
         }
     }
 
     @Override
-    public void deleteProject() {
-
+    public void deleteProject(UUID id) {
+        projectRepository.deleteById(id);
     }
 
     @Override
     public List<Project> retriveAllProject() {
-        return null;
+        return  (List<Project>) projectRepository.findAll();
     }
 }

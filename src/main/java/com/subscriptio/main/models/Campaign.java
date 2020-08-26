@@ -20,7 +20,7 @@ public class Campaign extends BaseEntity{
 
     @Lob
     @Column(name = "campaign_attachment")
-    private Blob campaignAttachment;
+    private byte[] campaignAttachment;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Project project;

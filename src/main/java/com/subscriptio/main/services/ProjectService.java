@@ -8,6 +8,6 @@ import java.util.UUID;
 public interface ProjectService {
     Project createProject(Project project);
     Project retriveProject(UUID id);
-    void deleteProject();
+    void deleteProject(UUID id);
     List<Project> retriveAllProject();
 }

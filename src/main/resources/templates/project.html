@@ -2,9 +2,27 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" >
-    <title>Project</title>
+    <title th:text="${'project | ' + project.getProjectName()}">Project</title>
 </head>
 <body>
     <h2>Project</h2>
+    <p th:text="${project.getProjectName()}"></p>
+    <p th:text="${project.getCreatedAt()}"></p>
+    <h3>Campaigns</h3>
+    <h4>New Campaign</h4>
+    <form th:action="@{'/projects/' + ${project.getId()} + '/campaigns'}" method="post" th:object="${campaign}">
+        <label for="campaign-subject">Campaign Subject</label>
+        <input type="text" id="campaign-subject" th:field="*{campaignSubject}">
+        <label for="campaign-subject">Text</label>
+        <input type="text" id="campaign-content" th:field="*{campaignContent}">
+        <label for="campaign-attachment">Attachment</label>
+        <input type="file" id="campaign-attachment" th:field="*{campaignAttachment}">
+        <label for="submit">Submit</label>
+        <input type="submit" id="submit" value="Submit">
+    </form>
+    <div th:each="campaign : ${project.campaigns}">
+        <p th:text="${campaign.getCampaignSubject()}"></p>
+        <p th:text="${campaign.getCreatedAt()}"></p>
+    </div>
 </body>
 </html>

@@ -13,7 +13,15 @@
         <input type="text" id="project-name" th:field="*{projectName}">
         <label for="submit">Submit</label>
         <input type="submit" id="submit" value="Submit">
-
     </form>
+    <div>
+        <div th:each="project : ${projects}">
+            <p th:text="${project.getProjectName()}"></p>
+            <p th:text="${project.getCreatedAt()}"></p>
+            <form th:action="${'/projects/delete/' + project.getId()}" method="post">
+                <input value="delete" type="submit">
+            </form>
+        </div>
+    </div>
 </body>
 </html>
